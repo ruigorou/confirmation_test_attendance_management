@@ -1,0 +1,91 @@
+.attendance-list {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.attendance-list__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.attendance-list__month-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    position: relative;
+    border-radius: 8px;
+}
+
+.attendance-list__month-nav-prev {
+    position: absolute;
+    left: 20px;
+    text-decoration: none;
+    color: #808080;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.attendance-list__month-nav-current {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.attendance-list__month-nav-next {
+    position: absolute;
+    right: 20px;
+    text-decoration: none;
+    color: #808080;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.attendance-list__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.attendance-list__th {
+    border-bottom: 5px solid #dcdcdc;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    background: #fff;
+    color: #808080;
+}
+
+.attendance-list__tr {
+    background: #fff;
+    border-bottom: 3px solid #dcdcdc;
+}
+
+.attendance-list__th-date {
+    border-radius: 10px 0 0 0;
+}
+
+.attendance-list__th-detail {
+    border-radius: 0 10px 0 0;
+    font-weight: bold;
+}
+
+.attendance-list__tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.attendance-list__td {
+    border-bottom: 1px solid #ddd;
+    padding: 12px 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.attendance-list__detail-link {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+

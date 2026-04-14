@@ -1,0 +1,31 @@
+.verification {
+    max-width: 800px;
+    width: 100%;
+    margin: 200px auto;
+    text-align: center;
+}
+
+.verification__text {
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.verification__actions {
+    margin-bottom: 30px;
+}
+
+.verification__button--primary {
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    background: #c0c0c0;
+    color: #000;
+    border: 1px solid #000;
+}
+
+.verification__button {
+    border: none;
+    background: none;
+    color: #00bfff;
+}

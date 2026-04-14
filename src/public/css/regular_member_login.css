@@ -1,0 +1,55 @@
+.form {
+    max-width: 500px;
+    width: 100%;
+    margin: 50px auto;
+}
+
+.form__header {
+    text-align: center;
+}
+
+.form_group {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.form__label {
+    font-weight: bold;
+}
+
+.form__input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.form__error {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
+}
+
+.form__actions {
+    margin-top: 50px;
+}
+
+.form__button {
+    border: none;
+    background: #000;
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.form__link {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form__link-text {
+    text-decoration: none;
+    color: #00bfff;
+}
