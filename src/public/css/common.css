@@ -1,9 +1,9 @@
 body {
-    max-width: 1540px;
-    background: #dcdcdc;
+    background: #F0EFF2;
 }
 
 .header {
+    display: block;
     background: #000;
     padding: 10px;
     display: flex;

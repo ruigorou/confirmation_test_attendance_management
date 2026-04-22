@@ -16,7 +16,7 @@
             </p>
         </div>
         <div class="attendance__time">
-            <p class="attendance__time-text">{{ $now->format('H:i') }}</p>
+            <p class="attendance__time-text" id="clock">{{ $now->format('H:i') }}</p>
         </div>
         @if($attendance?->status === '退勤済')
             <div class="attendance__clock-out-time">
@@ -51,4 +51,5 @@
             @endif
         </div>
    </div>
+   <script src="{{ asset('js/time_count.js') }}"></script>
 @endsection

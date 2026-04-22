@@ -15,5 +15,17 @@ class Attendance extends Model
         'clock_in',
         'clock_out',
         'status',
+        'remarks',
+        'approval_status',
     ];
+
+    public function break_times()
+    {
+        return $this->hasMany(BreakTime::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

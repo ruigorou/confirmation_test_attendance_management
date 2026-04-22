@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceListController;
+use App\Http\Controllers\AttendanceDetailController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -34,6 +35,10 @@ Route::middleware('auth')->group(function () {
 
     // --------勤怠一覧画面-----------
     Route::get('/attendance/list', [AttendanceListController::class, 'attendance_list'])->name('attendance.list');
+
+    // --------勤怠詳細画面-----------
+    Route::get('/attendance/{id}', [AttendanceDetailController::class, 'attendance_detail'])->name('attendance.detail');
+    Route::put('/attendance/{id}', [AttendanceDetailController::class, 'update_attendance'])->name('attendance.update');
 
 });
 

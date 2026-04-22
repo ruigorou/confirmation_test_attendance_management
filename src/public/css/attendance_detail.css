@@ -1,0 +1,116 @@
+.form__error {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
+}
+
+.attendance-detail {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.attendance-detail__title {
+    font-size: 24px;
+    font-weight: bold;
+    border-left: 8px solid #000;
+    padding-left: 10px;
+    margin: 20px auto;
+}
+
+.attendance-detail__table {
+    max-width: 800px;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.attendance-detail__tr {
+    background: #fff;
+    border-bottom: 3px solid #dcdcdc;
+}
+
+.attendance-detail__tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.attendance-detail__td {
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.detail-label {
+    border-radius: 8px 0 0 0;
+}
+
+.detail-value {
+    border-radius: 0 8px 0 0;
+}
+
+.detail-input {
+    width: 80px;
+    padding: 6px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.detail-remarks-row {
+    background: #fff;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.attendance-detail__textarea {
+    width: 250px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.no-column-width td {
+    width: auto !important;
+}
+
+.detail-remarks-label {
+    border-radius: 0 0 0 8px;
+}
+
+.detail-remarks {
+    border-radius: 0 0 8px 0;
+}
+
+table td:nth-child(1) {
+    padding-left: 50px;
+    width: 250px;
+}
+
+table td:nth-child(2) {
+    width: 100px;
+}
+
+table td:nth-child(3) {
+    text-align: center;
+    width: 80px;
+}
+
+.button-container {
+    max-width: 800px;
+    width: 100%;
+    margin: 20px auto;
+    text-align: right;
+}
+
+.btn-primary {
+    background: #000;
+    color: #fff;
+    padding: 5px 30px;
+}
+
+.approval-status__text {
+    color: red;
+}
