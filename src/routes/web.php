@@ -3,6 +3,8 @@
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceListController;
 use App\Http\Controllers\AttendanceDetailController;
+use App\Http\Controllers\AttendanceApplicationListController;
+use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -12,6 +14,10 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Route::get('/register', [RegisterController::class, 'member_registration'])->name('member.register');
 Route::post('/register', [RegisterController::class, 'store'])->name('member.store');
 
+//-------- 管理者ログイン--------
+Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login.form');
+Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin.login');
+
 //-------- ログイン--------
 Route::get('/', function () {
     return redirect('/login');
@@ -19,8 +25,14 @@ Route::get('/', function () {
 
  Route::post('/attendance', [AttendanceController::class, 'login'])->name('attendance.login');
 
+ //------------管理者画面 ログイン後------------
+Route::middleware('auth.admin_login')->group(function () {
+    // --------管理者ダッシュボード（プレースホルダー）-----------
+
+});
+
 //-----------------ログイン後-------------------
-Route::middleware('auth')->group(function () {
+Route::middleware('auth.regular_member_login')->group(function () {
 
     // --------勤怠管理画面-----------
     route::get('/attendance', [AttendanceController::class, 'show_attendance'])->name('attendance.show');
@@ -35,6 +47,9 @@ Route::middleware('auth')->group(function () {
 
     // --------勤怠一覧画面-----------
     Route::get('/attendance/list', [AttendanceListController::class, 'attendance_list'])->name('attendance.list');
+
+    // --------申請一覧画面-----------
+    Route::get('/stamp_correction_request/list', [AttendanceApplicationListController::class, 'index'])->name('attendance.application.list');
 
     // --------勤怠詳細画面-----------
     Route::get('/attendance/{id}', [AttendanceDetailController::class, 'attendance_detail'])->name('attendance.detail');

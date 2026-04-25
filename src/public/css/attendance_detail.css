@@ -15,7 +15,7 @@
     font-weight: bold;
     border-left: 8px solid #000;
     padding-left: 10px;
-    margin: 20px auto;
+    margin: 20px auto 50px auto;
 }
 
 .attendance-detail__table {

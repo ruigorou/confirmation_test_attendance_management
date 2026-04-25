@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Attendance;
 use App\Http\Requests\AttendanceDetailRequest;
+use App\Models\BreakTime;
 use Carbon\Carbon;
 
 class AttendanceDetailController extends Controller
@@ -40,6 +41,19 @@ class AttendanceDetailController extends Controller
                 ]);
             }
         }
+
+        // --- 新規休憩時間の登録 ---
+        $newStart = $request->input('new_start_time');
+        $newEnd = $request->input('new_end_time');
+
+        if (!empty($newStart) && !empty($newEnd)) {
+            BreakTime::create([
+                'attendance_id' => $id,
+                'start_time' => Carbon::parse($attendance->date . ' ' . $newStart),
+                'end_time' => Carbon::parse($attendance->date . ' ' . $newEnd),
+            ]);
+        }
+
         return back();
     }
 }

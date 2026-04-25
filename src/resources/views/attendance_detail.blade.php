@@ -64,13 +64,17 @@
                     </tr>
                 @endif
                 @php
-                    $count = 1;
+                    $count = 0;
                 @endphp
                 @forelse($attendance->break_times as $break_time)
+                @php
+                    $count++;
+                @endphp
                 <tr class="attendance-detail__tr">
                     <td class="attendance-detail__td">
-                        休憩
+                        休憩 {{ $count === 1 ? '' : $count }}
                     </td>
+                    
                     <td class="attendance-detail__td">
                         <input class="detail-input" type="time" name="start_time{{ $break_time->id }}" value="{{ \Carbon\Carbon::parse($break_time->start_time)->format('H:i') }}" @if($attendance->approval_status !== 'なし') disabled @endif>
                     </td>
@@ -98,37 +102,39 @@
                         </td>
                     </tr>
                 @endif
-                @php
-                    $count++;
-                @endphp
                 @empty
-                    <tr class="attendance-detail__tr">
-                        <td class="attendance-detail__td">
-                            休憩
-                        </td>
-                        <td class="attendance-detail__td">
-                            <input class="detail-input" type="time" name="start_time" value="" @if($attendance->approval_status !== 'なし') disabled @endif>
-                        </td>
-                        <td>〜</td>
-                        <td>
-                            <input class="detail-input" type="time" name="end_time" value="" @if($attendance->approval_status !== 'なし') disabled @endif>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr class="attendance-detail__tr">
-                        <td class="attendance-detail__td">
-                            休憩 2
-                        </td>
-                        <td class="attendance-detail__td">
-                            <input class="detail-input" type="time" name="start_time" value="" @if($attendance->approval_status !== 'なし') disabled @endif>
-                        </td>
-                        <td>〜</td>
-                        <td>
-                            <input class="detail-input" type="time" name="end_time" value="" @if($attendance->approval_status !== 'なし') disabled @endif>
-                        </td>
-                        <td></td>
-                    </tr>
                 @endforelse
+                <tr class="attendance-detail__tr">
+                    <td class="attendance-detail__td">
+                        休憩 {{ $count === 0 ? '' : $count + 1 }}
+                    </td>
+                    <td class="attendance-detail__td">
+                        <input class="detail-input" type="time" name="new_start_time" value="{{ old('new_start_time') }}" @if($attendance->approval_status !== 'なし') disabled @endif>
+                    </td>
+                    <td>〜</td>
+                    <td>
+                        <input class="detail-input" type="time" name="new_end_time" value="{{ old('new_end_time') }}" @if($attendance->approval_status !== 'なし') disabled @endif>
+                    </td>
+                    <td></td>
+                </tr>
+                @if ($errors->has('new_start_time'))
+                    <tr>
+                        <td colspan="3">
+                            <div class="form__error">
+                                {{ $errors->first('new_start_time') }}
+                            </div>
+                        </td>
+                    </tr>
+                @endif
+                @if ($errors->has('new_end_time'))
+                    <tr>
+                        <td colspan="3">
+                            <div class="form__error">
+                                {{ $errors->first('new_end_time') }}
+                            </div>
+                        </td>
+                    </tr>
+                @endif
                 <tr class="detail-remarks-row no-column-width">
                     <td class="attendance-detail__td detail-remarks-label"> 備考
                     </td>

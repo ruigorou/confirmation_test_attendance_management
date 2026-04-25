@@ -23,7 +23,7 @@ class AttendanceListController extends Controller
             $dates[] = $current->copy();
             $current->addDay();
         }
-       
+        
        $attendances = Attendance::where('user_id', $user_id)
         ->whereBetween('date', [$start, $end])
         ->orderBy('date')
@@ -51,12 +51,13 @@ class AttendanceListController extends Controller
             // --- 表示用フォーマット ---
             // 休憩
             $attendance->break_time = $break_seconds > 0
-                ? gmdate('H:i', (int)round($break_seconds / 60) * 60)
+                ? gmdate('H:i', (int)round($break_seconds / 60)*60)
                 : null;
 
             // 合計
+            
             $attendance->total_time = $total_seconds !== null
-                ? gmdate('H:i', (int)round($total_seconds / 60) * 60)
+                ? gmdate('H:i', (int)round($total_seconds / 60)*60)
                 : null;
 
             return $attendance;
