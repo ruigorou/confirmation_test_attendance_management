@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminAttendanceListController;
+use App\Http\Controllers\AdminAttendanceDetailController;
+use App\Http\Controllers\AdminStaffListController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceListController;
 use App\Http\Controllers\AttendanceDetailController;
@@ -27,14 +30,21 @@ Route::get('/', function () {
 
  //------------管理者画面 ログイン後------------
 Route::middleware('auth.admin_login')->group(function () {
-    // --------管理者ダッシュボード（プレースホルダー）-----------
+    // --------  勤怠一覧画面(管理者)  -----------
+    Route::get('/admin/attendance/list', [AdminAttendanceListController::class, 'admin_attendance_list'])->name('admin.attendance.list');
 
+    // --------  勤怠詳細画面（管理者）  -----------
+    Route::get('/admin/attendance/{id}', [AdminAttendanceDetailController::class, 'show'])->name('admin.attendance.detail');
+    Route::put('/admin/attendance/{id}', [AdminAttendanceDetailController::class, 'update'])->name('admin.attendance.detail.update');
+
+    // --------  スタッフ一覧画面（管理者）  -----------
+    Route::get('/admin/staff/list', [AdminStaffListController::class, 'index'])->name('admin.staff.list');
 });
 
-//-----------------ログイン後-------------------
+//-----------------ログイン後（一般ユーザー）-------------------
 Route::middleware('auth.regular_member_login')->group(function () {
 
-    // --------勤怠管理画面-----------
+    // --------勤怠管理画面（一般ユーザー）-----------
     route::get('/attendance', [AttendanceController::class, 'show_attendance'])->name('attendance.show');
 
     Route::post('attendance/clock_in', [AttendanceController::class, 'clock_in'])->name('attendance.clock_in');
@@ -45,13 +55,13 @@ Route::middleware('auth.regular_member_login')->group(function () {
 
     Route::post('attendance/break_end', [AttendanceController::class, 'break_end'])->name('attendance.break_end');
 
-    // --------勤怠一覧画面-----------
+    // --------勤怠一覧画面（一般ユーザー）-----------
     Route::get('/attendance/list', [AttendanceListController::class, 'attendance_list'])->name('attendance.list');
 
-    // --------申請一覧画面-----------
+    // --------申請一覧画面（一般ユーザー）-----------
     Route::get('/stamp_correction_request/list', [AttendanceApplicationListController::class, 'index'])->name('attendance.application.list');
 
-    // --------勤怠詳細画面-----------
+    // --------勤怠詳細画面（一般ユーザー）-----------
     Route::get('/attendance/{id}', [AttendanceDetailController::class, 'attendance_detail'])->name('attendance.detail');
     Route::put('/attendance/{id}', [AttendanceDetailController::class, 'update_attendance'])->name('attendance.update');
 

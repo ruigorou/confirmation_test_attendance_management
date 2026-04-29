@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create();
 
         // Create attendances for users
-        $users = \App\Models\User::all();
+        $users = \App\Models\User::where('id', '!=', 1)->get();
         foreach ($users as $user) {
             $attendances = \App\Models\Attendance::factory(rand(5, 20))->create([
                 'user_id' => $user->id,

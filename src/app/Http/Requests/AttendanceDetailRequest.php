@@ -16,7 +16,7 @@ class AttendanceDetailRequest extends FormRequest
         return [
             'clock_in' => 'required|date_format:H:i',
             'clock_out' => 'required|date_format:H:i',
-            'remarks' => 'required|string|min:1',
+            'remarks' => 'required',
             'new_start_time' => 'nullable|date_format:H:i',
             'new_end_time' => 'nullable|date_format:H:i',
         ];
@@ -26,7 +26,6 @@ class AttendanceDetailRequest extends FormRequest
     {
         return [
             'remarks.required' => '備考欄を記入してください。',
-            'remarks.min' => '備考欄を記入してください。',
             'clock_in.required' => '出勤時間は必須です。',
             'clock_in.date_format' => '出勤時間の形式が正しくありません。',
             'clock_out.required' => '退勤時間は必須です。',

@@ -18,13 +18,13 @@
         @auth
             <div class="header__nav">
                 <div>
-                    <a class="header__nav-item" href="{{ route('attendance.show') }}">勤怠</a>
+                    <a class="header__nav-item" href="{{ route('admin.attendance.list') }}">勤怠一覧</a>
+                </div>
+                 <div>
+                    <a class="header__nav-item" href="{{ route('admin.staff.list') }}">スタッフ一覧</a>
                 </div>
                 <div>
-                    <a class="header__nav-item" href="{{ route('attendance.list') }}">勤怠一覧</a>
-                </div>
-                <div>
-                    <a class="header__nav-item" href="{{ route('attendance.application.list') }}">申請</a>
+                    <a class="header__nav-item" href="">申請一覧</a>
                 </div>
                 <div>
                     <form action="{{ route('logout') }}" method="post">

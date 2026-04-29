@@ -26,7 +26,7 @@ class AdminLoginController extends Controller
                 ]);
             }
 
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.attendance.list');
         }
 
         return back()->withErrors([
