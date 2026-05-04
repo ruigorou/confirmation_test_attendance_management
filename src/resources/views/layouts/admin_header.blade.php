@@ -24,10 +24,10 @@
                     <a class="header__nav-item" href="{{ route('admin.staff.list') }}">スタッフ一覧</a>
                 </div>
                 <div>
-                    <a class="header__nav-item" href="">申請一覧</a>
+                    <a class="header__nav-item" href="{{ route('admin.attendance.application.list') }}">申請一覧</a>
                 </div>
                 <div>
-                    <form action="{{ route('logout') }}" method="post">
+                    <form action="{{ route('admin.logout') }}" method="post">
                         @csrf
                         <button class="header__nav-logout" type="submit">ログアウト</button>
                     </form>

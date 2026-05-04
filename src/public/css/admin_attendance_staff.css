@@ -76,11 +76,6 @@
     color: #808080;
 }
 
-.attendance-list__tr {
-    background: #fff;
-    border-bottom: 3px solid #dcdcdc;
-}
-
 .attendance-list__th-date {
     border-radius: 10px 0 0 0;
 }
@@ -88,6 +83,11 @@
 .attendance-list__th-detail {
     border-radius: 0 10px 0 0;
     font-weight: bold;
+}
+
+.attendance-list__tr {
+    background: #fff;
+    border-bottom: 3px solid #dcdcdc;
 }
 
 .attendance-list__td {
@@ -101,4 +101,16 @@
     color: #000;
     text-decoration: none;
     font-weight: bold;
+}
+
+.attendance-list__csv {
+    margin-top: 30px;
+    text-align: right;
+}
+
+.attendance-list__csv-link {
+    text-decoration: none;
+    background: #000;
+    color: #fff;
+    padding: 5px 30px;
 }

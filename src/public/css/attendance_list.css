@@ -89,10 +89,6 @@
     font-weight: bold;
 }
 
-.attendance-list__tr:nth-child(even) {
-    background: #f9f9f9;
-}
-
 .attendance-list__td {
     border-bottom: 1px solid #ddd;
     padding: 12px 10px;

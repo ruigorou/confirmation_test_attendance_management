@@ -28,6 +28,7 @@
 .attendance-detail__tr {
     background: #fff;
     border-bottom: 3px solid #dcdcdc;
+    height: 80px;
 }
 
 .attendance-detail__td {
@@ -45,27 +46,10 @@
     border-radius: 0 8px 0 0;
 }
 
-.detail-input {
-    width: 80px;
-    padding: 6px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-align: center;
-}
-
 .detail-remarks-row {
     background: #fff;
     border-bottom: 1px solid #dcdcdc;
-}
-
-.attendance-detail__textarea {
-    width: 250px;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    resize: vertical;
+    height: 80px;
 }
 
 .no-column-width td {
@@ -104,9 +88,19 @@ table td:nth-child(3) {
 .btn-primary {
     background: #000;
     color: #fff;
-    padding: 5px 30px;
+    padding: 10px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
 }
 
-.approval-status__text {
-    color: red;
+.btn-approved {
+    background: #aaa;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: not-allowed;
+    border-radius: 5px;
+    font-size: 18px;
 }

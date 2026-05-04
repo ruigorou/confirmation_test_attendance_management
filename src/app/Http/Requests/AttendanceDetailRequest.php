@@ -52,7 +52,7 @@ class AttendanceDetailRequest extends FormRequest
             }
 
             // 既存休憩のバリデーションと最終終了時刻の収集
-            $lastBreakEnd = null;
+            $last_break_end = null;
             $allInput = $this->all();
 
             // IDを抽出してソート（登録順に検証）
@@ -65,32 +65,32 @@ class AttendanceDetailRequest extends FormRequest
             sort($breakIds);
 
             foreach ($breakIds as $breakId) {
-                $breakStart = $this->input("start_time{$breakId}");
-                $breakEnd = $this->input("end_time{$breakId}");
+                $break_start = $this->input("start_time{$breakId}");
+                $break_end = $this->input("end_time{$breakId}");
 
-                if (empty($breakStart) && empty($breakEnd)) {
+                if (empty($break_start) && empty($break_end)) {
                     continue;
                 }
 
-                if (!empty($breakStart) && !empty($breakEnd)) {
+                if (!empty($break_start) && !empty($break_end)) {
                     // 出勤時間より前
-                    if (strtotime($breakStart) < strtotime($clockIn)) {
-                        $validator->errors()->add("start_time{$breakId}", '');
+                    if (strtotime($break_start) < strtotime($clockIn)) {
+                        $validator->errors()->add("start_time{$breakId}", '休憩時間が不適切な値です。');
                     }
                     // 前の休憩終了より前
-                    if ($lastBreakEnd !== null && strtotime($breakStart) < strtotime($lastBreakEnd)) {
+                    if ($last_break_end !== null && strtotime($break_start) < strtotime($last_break_end)) {
                         $validator->errors()->add("start_time{$breakId}", '休憩時間が不適切な値です。');
                     }
                     // 休憩開始≧休憩終了
-                    if (strtotime($breakStart) >= strtotime($breakEnd)) {
+                    if (strtotime($break_start) >= strtotime($break_end)) {
                         $validator->errors()->add("start_time{$breakId}", '休憩時間が不適切な値です。');
                     }
                     // 退勤時間より後
-                    if (strtotime($breakEnd) > strtotime($clockOut)) {
+                    if (strtotime($break_end) > strtotime($clockOut)) {
                         $validator->errors()->add("end_time{$breakId}", '休憩時間もしくは退勤時間が不適切な値です。');
                     }
 
-                    $lastBreakEnd = $breakEnd;
+                    $last_break_end = $break_end;
                 }
             }
 
@@ -116,7 +116,7 @@ class AttendanceDetailRequest extends FormRequest
                 $validator->errors()->add('new_start_time', '休憩時間が不適切な値です。');
             }
             // 前の休憩終了より前
-            if ($lastBreakEnd !== null && strtotime($newStart) < strtotime($lastBreakEnd)) {
+            if ($last_break_end !== null && strtotime($newStart) < strtotime($last_break_end)) {
                 $validator->errors()->add('new_start_time', '休憩時間が不適切な値です。');
             }
             // 休憩開始≧休憩終了

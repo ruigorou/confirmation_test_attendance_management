@@ -19,7 +19,9 @@
             <tr class="attendance-list__tr">
                 <td class="attendance-list__td">{{ $user->name }}</td>
                 <td class="attendance-list__td">{{ $user->email }}</td>
-                <td class="attendance-list__td">詳細</td>
+                <td class="attendance-list__td">
+                    <a class="attendance-list__link" href="{{ route('admin.attendance.staff', ['id' => $user->id]) }}">詳細</a>
+                </td>
             </tr>
             @endforeach
         </tbody>

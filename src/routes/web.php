@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\AdminAttendanceApplicationListController;
+use App\Http\Controllers\AdminApprovalController;
 use App\Http\Controllers\AdminAttendanceListController;
 use App\Http\Controllers\AdminAttendanceDetailController;
+use App\Http\Controllers\AdminAttendanceStaffController;
 use App\Http\Controllers\AdminStaffListController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceListController;
 use App\Http\Controllers\AttendanceDetailController;
 use App\Http\Controllers\AttendanceApplicationListController;
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\AdminLogoutController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -39,7 +43,19 @@ Route::middleware('auth.admin_login')->group(function () {
 
     // --------  スタッフ一覧画面（管理者）  -----------
     Route::get('/admin/staff/list', [AdminStaffListController::class, 'index'])->name('admin.staff.list');
+
+    Route::get('/admin/attendance/staff/{id}', [AdminAttendanceStaffController::class, 'attendance_staff'])->name('admin.attendance.staff');
+
+    Route::get('/admin/attendance/staff/{id}/csv-download', [AdminAttendanceStaffController::class, 'export_csv'])->name('admin.export.csv');
+
+    //----------- 申請一覧 -----------------
+    Route::get('/satmp_correction_request/list', [AdminAttendanceApplicationListController::class, 'attendance_list'])->name('admin.attendance.application.list');
+
+    //----------- 申請承認 -----------------
+    Route::get('/stamp_correction_request/approval/{attendance_correct_request_id}', [AdminApprovalController::class, 'show'])->name('admin.approval.show');
+    Route::patch('/stamp_correction_request/approval/{attendance_correct_request_id}', [AdminApprovalController::class, 'approve'])->name('admin.approval.approve');
 });
+Route::post('/admin/logout', [AdminLogoutController::class, 'admin_logout'])->name('admin.logout');
 
 //-----------------ログイン後（一般ユーザー）-------------------
 Route::middleware('auth.regular_member_login')->group(function () {
