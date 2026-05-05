@@ -39,4 +39,4 @@ php artisan key:generate
 - MySQL 8.0.26
 
 ## ER図
-![](src/image/er.png)
+![](./src/public/image/er.png)
