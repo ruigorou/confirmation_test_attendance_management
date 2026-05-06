@@ -12,11 +12,11 @@
 3. ```cp .env.example .env```
 4. .envに以下の環境変数を追加 
 ``` 
-DB_CONNECTION=mysql
-DB_HOST=mysql
-DB_PORT=3306
-DB_DATABASE=laravel_db
-DB_USERNAME=laravel_user
+DB_CONNECTION=mysql 
+DB_HOST=mysql 
+DB_PORT=3306 
+DB_DATABASE=laravel_db 
+DB_USERNAME=laravel_user 
 DB_PASSWORD=laravel_pass 
 ```
 5. アプリケーションキーの作成 
@@ -30,12 +30,14 @@ php artisan key:generate
 
 ## テスト環境構築
 1. ```docker-compose exec php bash```
-2. ```cp .env.testing .env```
-APP_ENV=testing
-DB_CONNECTION=sqlite
-DB_DATABASE=:memory:
-SESSION_DRIVER=array
-MAIL_MAILER=array
+2. ```cp .env.testing .env```  
+```  
+APP_ENV=testing  
+DB_CONNECTION=sqlite  
+DB_DATABASE=:memory:  
+SESSION_DRIVER=array  
+MAIL_MAILER=array  
+```
 
 ## URL 
 - 開発環境：http://localhost
