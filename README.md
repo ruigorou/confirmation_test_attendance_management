@@ -28,6 +28,15 @@ php artisan key:generate
 7. シーディングの実行 
 ```php artisan db:seed```
 
+## テスト環境構築
+1. ```docker-compose exec php bash```
+2. ```cp .env.testing .env```
+APP_ENV=testing
+DB_CONNECTION=sqlite
+DB_DATABASE=:memory:
+SESSION_DRIVER=array
+MAIL_MAILER=array
+
 ## URL 
 - 開発環境：http://localhost
 - phpMyAdmin：http://localhost:8080/
