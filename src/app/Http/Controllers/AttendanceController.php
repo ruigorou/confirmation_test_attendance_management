@@ -8,36 +8,47 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Attendance;
 use App\Models\BreakTime;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AttendanceController extends Controller
 {
     public function login (LoginRequest $request) {
        $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        $user = User::where('email', $credentials['email'])->first();
 
-            $user = Auth::user();
-
-            // メール未認証ならリダイレクト
-            if (is_null($user->email_verified_at)) {
-                $request->user()->sendEmailVerificationNotification();
-
-                return redirect()->route('verification.notice');
-            }
-
-            // 認証済みなら通常画面へ
-            $user_id = Auth()->user()->id;
-            $now = Carbon::now();
-            $attendance = Attendance::where('user_id', $user_id)
-                ->where('date', $now->toDateString())
-                ->latest()
-                ->first();
-            return view('attendance', compact('user_id', 'now', 'attendance'));
+        // メール存在しない
+        if (!$user) {
+            return back()->withErrors([
+                'email' => 'ログイン情報が登録されていません',
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => 'ログイン情報が登録されていません',
-        ]);
+        // パスワード不一致
+        if (!Hash::check($credentials['password'], $user->password)) {
+            return back()->withErrors([
+                'password' => 'パスワードと一致しません',
+            ]);
+        }
+
+        Auth::login($user);
+
+        // メール未認証
+        if (is_null($user->email_verified_at)) {
+            $request->user()->sendEmailVerificationNotification();
+            return redirect()->route('verification.notice');
+        }
+
+        $user_id = $user->id;
+        $now = Carbon::now();
+
+        $attendance = Attendance::where('user_id', $user_id)
+            ->where('date', $now->toDateString())
+            ->latest()
+            ->first();
+
+        return view('attendance', compact('user_id', 'now', 'attendance'));
     }
 
     public function show_attendance () {

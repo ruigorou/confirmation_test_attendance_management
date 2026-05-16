@@ -7,7 +7,7 @@ use App\Http\Requests\LoginRequest;
 
 class AdminLoginController extends Controller
 {
-    public function showLoginForm()
+    public function show_login_form()
     {
         return view('auth.admin_login');
     }

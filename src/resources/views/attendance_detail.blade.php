@@ -157,6 +157,8 @@
         <div class="button-container">
             @if ($attendance->approval_status === 'なし')
                  <button type="submit" class="btn btn-primary">修正</button>
+            @elseif ($attendance->approval_status === '承認済み')
+                <p class="approval-status__text">・管理者承認済み</p>
             @else
                 <p class="approval-status__text">・承認待ちのため修正はできません。</p>
             @endif

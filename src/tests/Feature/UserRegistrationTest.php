@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UserRegistrationTest extends TestCase
@@ -46,5 +45,6 @@ class UserRegistrationTest extends TestCase
 
         // emailフィールドにエラーがあることを検証
         $response->assertSessionHasErrors(['email']);
+        $response->assertSessionDoesntHaveErrors(['password' => 'error']);
     }
 }

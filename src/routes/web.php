@@ -22,7 +22,7 @@ Route::get('/register', [RegisterController::class, 'member_registration'])->nam
 Route::post('/register', [RegisterController::class, 'store'])->name('member.store');
 
 //-------- 管理者ログイン--------
-Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login.form');
+Route::get('/admin/login', [AdminLoginController::class, 'show_login_form'])->name('admin.login.form');
 Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin.login');
 
 //-------- ログイン--------
@@ -30,7 +30,7 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
- Route::post('/attendance', [AttendanceController::class, 'login'])->name('attendance.login');
+Route::post('/attendance', [AttendanceController::class, 'login'])->name('attendance.login');
 
  //------------管理者画面 ログイン後------------
 Route::middleware('auth.admin_login')->group(function () {
@@ -61,7 +61,7 @@ Route::post('/admin/logout', [AdminLogoutController::class, 'admin_logout'])->na
 Route::middleware('auth.regular_member_login')->group(function () {
 
     // --------勤怠管理画面（一般ユーザー）-----------
-    route::get('/attendance', [AttendanceController::class, 'show_attendance'])->name('attendance.show');
+    Route::get('/attendance', [AttendanceController::class, 'show_attendance'])->name('attendance.show');
 
     Route::post('attendance/clock_in', [AttendanceController::class, 'clock_in'])->name('attendance.clock_in');
 

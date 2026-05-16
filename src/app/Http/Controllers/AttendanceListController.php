@@ -25,7 +25,7 @@ class AttendanceListController extends Controller
         }
         
        $attendances = Attendance::where('user_id', $user_id)
-        ->whereBetween('date', [$start, $end])
+        ->whereBetween('date', [$start->toDateString(), $end->toDateString()])
         ->orderBy('date')
         ->get()
         ->map(function ($attendance) {
