@@ -25,7 +25,7 @@ class AttendanceDetailRequest extends FormRequest
     public function messages()
     {
         return [
-            'remarks.required' => '備考欄を記入してください。',
+            'remarks.required' => '備考を記入してください',
             'clock_in.required' => '出勤時間は必須です。',
             'clock_in.date_format' => '出勤時間の形式が正しくありません。',
             'clock_out.required' => '退勤時間は必須です。',
@@ -47,7 +47,7 @@ class AttendanceDetailRequest extends FormRequest
 
             // 出勤・退勤の順序チェック
             if (strtotime($clockIn) >= strtotime($clockOut)) {
-                $validator->errors()->add('clock_in', '出勤時間もしくは退勤時間が不適切な値です。');
+                $validator->errors()->add('clock_in', '出勤時間もしくは退勤時間が不適切な値です');
                 return;
             }
 
@@ -81,13 +81,18 @@ class AttendanceDetailRequest extends FormRequest
                     if ($last_break_end !== null && strtotime($break_start) < strtotime($last_break_end)) {
                         $validator->errors()->add("start_time{$breakId}", '休憩時間が不適切な値です。');
                     }
+                    //休憩開始時間が退勤時間より後
+                    if (strtotime($break_start) > strtotime($clockOut)) {
+                        $validator->errors()->add("start_time{$breakId}", '休憩時間が不適切な値です');
+                    }
+
                     // 休憩開始≧休憩終了
                     if (strtotime($break_start) >= strtotime($break_end)) {
-                        $validator->errors()->add("start_time{$breakId}", '休憩時間が不適切な値です。');
+                        $validator->errors()->add("start_time{$breakId}", '休憩時間が不適切な値です');
                     }
                     // 退勤時間より後
                     if (strtotime($break_end) > strtotime($clockOut)) {
-                        $validator->errors()->add("end_time{$breakId}", '休憩時間もしくは退勤時間が不適切な値です。');
+                        $validator->errors()->add("end_time{$breakId}", '休憩時間もしくは退勤時間が不適切な値です');
                     }
 
                     $last_break_end = $break_end;
