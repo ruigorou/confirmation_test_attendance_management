@@ -145,4 +145,97 @@ class AttendanceDetailCorrectionTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('2024/06/01');
     }
+
+    //「承認待ち」にログインユーザーが行った申請が全て表示されていること
+    public function test_attendance_detail_shows_all_pending_requests_for_user()
+    {
+        /** @var User $user */
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        // 複数の申請を作成
+        Attendance::create([
+            'user_id' => $user->id,
+            'date' => '2024-06-01',
+            'clock_in' => '09:00:00',
+            'clock_out' => '18:00:00',
+            'status' => '退勤済',
+            'approval_status' => '承認待ち',
+            'remarks' => 'テスト申請1'
+        ]);
+
+        Attendance::create([
+            'user_id' => $user->id,
+            'date' => '2024-06-02',
+            'clock_in' => '09:00:00',
+            'clock_out' => '18:00:00',
+            'status' => '退勤済',
+            'approval_status' => '承認待ち',
+            'remarks' => 'テスト申請2'
+        ]);
+
+        $response = $this->get("stamp_correction_request/list");
+
+        $response->assertStatus(200);
+        $response->assertSee('2024/06/01');
+        $response->assertSee('2024/06/02');
+    }
+
+    //「承認済み」に管理者が承認した修正申請が全て表示されている
+    public function test_attendance_detail_shows_all_approved_requests_for_user()
+    {
+        /** @var User $user */
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        // 複数の申請を作成
+        Attendance::create([
+            'user_id' => $user->id,
+            'date' => '2024-06-01',
+            'clock_in' => '09:00:00',
+            'clock_out' => '18:00:00',
+            'status' => '退勤済',
+            'approval_status' => '承認済み',
+            'remarks' => 'テスト申請1'
+        ]);
+
+        Attendance::create([
+            'user_id' => $user->id,
+            'date' => '2024-06-02',
+            'clock_in' => '09:00:00',
+            'clock_out' => '18:00:00',
+            'status' => '退勤済',
+            'approval_status' => '承認済み',
+            'remarks' => 'テスト申請2'
+        ]);
+
+        $response = $this->get("stamp_correction_request/list?tab=承認済み");
+
+        $response->assertStatus(200);
+        $response->assertSee('2024/06/01');
+        $response->assertSee('2024/06/02');
+    }
+
+    //各申請の「詳細」を押下すると勤怠詳細画面に遷移する
+    public function test_attendance_detail_shows_details_on_clicking_detail_button()
+    {
+        /** @var User $user */
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $attendance = Attendance::create([
+            'user_id' => $user->id,
+            'date' => '2024-06-01',
+            'clock_in' => '09:00:00',
+            'clock_out' => '18:00:00',
+            'status' => '退勤済',
+            'approval_status' => '承認待ち',
+            'remarks' => 'テスト申請'
+        ]);
+
+         $response = $this->get('/attendance/' . $attendance->id);
+
+        $response->assertStatus(200);
+        $response->assertSee('テスト申請');
+    }
 }
